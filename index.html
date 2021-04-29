@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <h1>Lorem ipsum dolor sit amet</h1>
+    <p>Lorem ipsum dolor sit amet</p>
+    <button id="showalert" type="button">Mostrar alert</button>
+    <button id="showalert2" type="button">Mostrar alert #2</button>
+    <button id="showaconfirm" type="button">Confirmar</button>
+
+    <!--<div class="mlb-screen">
+        <div class="mlb-card">
+            <div class="mlb-header">
+                <h4>El archivo sera eliminado</h4>
+                <button type="button" class="mlb-close">×</button>
+            </div>
+            <div class="mlb-body">
+                Seguro que desea continuar?
+            </div>
+            <div class="mlb-footer">
+                <button type="button" class="mlb-btn">Cancelar</button>
+                <button type="button" class="mlb-btn">Aceptar</button>
+            </div>
+        </div>
+    </div>-->
+    <script>
+        window.addEventListener("DOMContentLoaded", ()=>{
+            const mydialog = new mblightbox();
+            document.querySelector("#showaconfirm").addEventListener("click", ()=>{
+                mydialog.show();
+            });
+        });
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>
