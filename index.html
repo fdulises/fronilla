@@ -11,30 +11,26 @@
     <h1>Lorem ipsum dolor sit amet</h1>
     <p>Lorem ipsum dolor sit amet</p>
     <button id="showalert" type="button">Mostrar alert</button>
-    <button id="showalert2" type="button">Mostrar alert #2</button>
     <button id="showaconfirm" type="button">Confirmar</button>
 
-    <!--<div class="mlb-screen">
-        <div class="mlb-card">
-            <div class="mlb-header">
-                <h4>El archivo sera eliminado</h4>
-                <button type="button" class="mlb-close">×</button>
-            </div>
-            <div class="mlb-body">
-                Seguro que desea continuar?
-            </div>
-            <div class="mlb-footer">
-                <button type="button" class="mlb-btn">Cancelar</button>
-                <button type="button" class="mlb-btn">Aceptar</button>
-            </div>
-        </div>
-    </div>-->
     <script>
         window.addEventListener("DOMContentLoaded", ()=>{
-            const mydialog = new mblightbox();
-            document.querySelector("#showaconfirm").addEventListener("click", ()=>{
-                mydialog.show();
+            //Creamos nuestro alert personalizado y lo asignamos a un boton
+            const myalert = new mblalert("Una alerta simple");
+            document.querySelector("#showalert").addEventListener("click", ()=> myalert.show());
+
+            //Creamos otro confirm personalizado que usaremos mas adelante
+            const accionConfirmada = new mblalert("El archivo se ha eliminado correctamente!");
+
+            //Creamos nuestro confirm personalizado y lo asignamos a un boton
+            const myconfirm = new mblconfirm({
+                header: "Estas apunto de eliminar un archivo",
+                body: "Realmente deseas continuar?",
+                action: (result) => {
+                    if(result) accionConfirmada.show();
+                }
             });
+            document.querySelector("#showaconfirm").addEventListener("click", myconfirm.show);
         });
     </script>
     <script src="main.js"></script>

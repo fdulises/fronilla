@@ -1,31 +1,74 @@
 class mblightbox{
-    constructor(args){
-        this.screen = document.createElement('div');
-        this.screen.setAttribute('class', 'mlb-screen mlb-hide');
-        if (args != null) addContent(args);
-        this.screen.addEventListener('click', () => {
+    constructor(html){
+        //Creamos el contenedor principal del lightbox
+        this.container = document.createElement('div');
+        this.container.setAttribute('class', 'mlb-container mlb-hide');
+        this.container.addEventListener('click', this.hide);
+        document.body.appendChild(this.container);
+
+        //Añadimos el html proporcionado por el usuario
+        if (html != null) this.setContent(html);
+    }
+
+    //Metodo para remover el lightbox y su contenido del html
+    remove = ()=> document.body.removeChild(this.container);
+
+    //Metodo para abrir lightbox
+    show = ()=> this.container.classList.remove('mlb-hide');
+
+    //Metodo para cerrar lightbox
+    hide = ()=>{
+        /*setTimeout(function () {
+            this.container.classList.add('mlb-hide');
+        }, 600);*/
+        this.container.classList.add('mlb-hide');
+    }
+
+    //Metodo para agregar contenido al lightbox
+    setContent = cont =>{
+        if (typeof cont == 'string'){
+            this.container.innerHTML = cont;
+            this.container.firstChild.addEventListener('click', (e)=>e.stopPropagation());
+        }else{
+            cont.addEventListener('click', e=>e.stopPropagation());
+            this.container.appendChild(cont);
+        }
+    }
+}
+class mblalert extends mblightbox {
+    constructor(body) {
+        let cont = `<div class="mlb-card">
+            <div class="mlb-body">${body}</div>
+            <div class="mlb-footer">
+                <button type="button" class="mlb-btn mlb-acept">Aceptar</button>
+            </div>
+        </div>`;
+        super(cont);
+        this.container.querySelector('.mlb-acept').addEventListener('click', this.hide);
+    }
+}
+class mblconfirm extends mblightbox{
+    constructor(param){
+        let cont = `<div class="mlb-card">
+            <div class="mlb-header">
+                <h4>${param.header}</h4>
+                <button type="button" class="mlb-close">×</button>
+            </div>
+            <div class="mlb-body">${param.body}</div>
+            <div class="mlb-footer">
+                <button type="button" class="mlb-btn mlb-cancel">Cancelar</button>
+                <button type="button" class="mlb-btn mlb-acept">Aceptar</button>
+            </div>
+        </div>`;
+        super(cont);
+        this.container.querySelector('.mlb-close').addEventListener('click', this.hide);
+        this.container.querySelector('.mlb-cancel').addEventListener('click', () => {
+            param.action(false);
             this.hide();
         });
-        document.body.appendChild(this.screen);
+        this.container.querySelector('.mlb-acept').addEventListener('click', () => {
+            param.action(true);
+            this.hide();
+        });
     }
-
-    show(){
-        this.screen.classList.remove('mlb-hide');
-    }
-
-    hide(){
-        /*setTimeout(function () {
-            this.screen.classList.add('mlb-hide');
-        }, 600);*/
-        this.screen.classList.add('mlb-hide');
-    }
-    
-    remove() {
-        document.body.removeChild(this.screen);
-    }
-
-    addContent(cont){
-        if (typeof cont == 'string') this.screen.innerHTML += cont;
-        else this.screen.appendChild(cont);
-    }
-};
+}

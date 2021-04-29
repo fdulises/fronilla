@@ -1,10 +1,10 @@
 body{margin: 0;}
-.mlb-screen *, .mlb-screen *::after, .mlb-screen *::before{
+.mlb-container *, .mlb-container *::after, .mlb-container *::before{
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
-.mlb-screen{
+.mlb-container{
     position: fixed;
     top: 0;
     left: 0;
