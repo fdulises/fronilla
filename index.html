@@ -17,7 +17,7 @@
         window.addEventListener("DOMContentLoaded", ()=>{
             //Creamos nuestro alert personalizado y lo asignamos a un boton
             const myalert = new mblalert("Una alerta simple");
-            document.querySelector("#showalert").addEventListener("click", ()=> myalert.show());
+            document.querySelector("#showalert").addEventListener("click", myalert.show);
 
             //Creamos otro confirm personalizado que usaremos mas adelante
             const accionConfirmada = new mblalert("El archivo se ha eliminado correctamente!");

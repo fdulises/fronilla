@@ -18,9 +18,7 @@ class mblightbox{
 
     //Metodo para cerrar lightbox
     hide = ()=>{
-        /*setTimeout(function () {
-            this.container.classList.add('mlb-hide');
-        }, 600);*/
+        /*setTimeout(()=>this.container.classList.add('mlb-hide'), 600);*/
         this.container.classList.add('mlb-hide');
     }
 
