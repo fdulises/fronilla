@@ -4,6 +4,11 @@
 * https://twitter.com/fidelulises
 * Licencia de uso: https://creativecommons.org/licenses/by-nc/4.0/deed.es
 */
+.liwedit-cont *{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 .liwedit-cont{
 	margin: 10px 0 15px 0;
 }
@@ -20,16 +25,43 @@
 	flex-direction: column;
 }
 .liwedit-toolbar {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	font-size: 16px;
 	background-color: #f3f3f3;
 	padding: 10px;
 	border-radius: 5px 5px 0 0;
 	border: 1px solid #ccc;
 	text-align: center;
 }
-.liwedit-cont textarea, .liwedit-cont select {margin: 0;}
+.liwedit-toolbar button {
+	padding: 10px;
+	color: #555;
+	font-size: 16px;
+	height: 38px;
+	border: 1px solid #999;
+	background-color: #fff;
+	border-radius: 3px;
+	margin: 0 2px;
+}
+.liwedit-toolbar button:hover,.liwedit-toolbar button:active{
+	background-color: #eee;
+}
+.liwedit-toolbar button:focus{
+	border-color: #333;
+}
+.liwedit-toolbar svg {
+	height: 100%;
+	width: 100%;
+	fill: #555;
+	display: block;
+}
+.liwedit-cont textarea, .liwedit-cont select {margin: 0 2px;}
 .liwedit-cont textarea{
 	height: 100%;
 	resize: vertical;
+	width: 100%;
 }
 .liwedit-cont p{
 	padding: 5px 0;
@@ -76,5 +108,5 @@ textarea[data-state="hidden"], [data-state="hidden"].liwedit-area{
 }
 .liwedit-toolbar select.form-in {
 	padding-right: 30px;
-	margin: 0;
+	margin: 0 2px;
 }
