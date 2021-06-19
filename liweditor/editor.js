@@ -1,5 +1,4 @@
 /*
-* Listefi Frontend Framework v1.0
 * Desarrollado por ULises Rendón
 * https://twitter.com/fidelulises
 * Licencia de uso: https://creativecommons.org/licenses/by-nc/4.0/deed.es
@@ -9,7 +8,7 @@ class liweditor {
     constructor(opt) {
         if (typeof opt != "object")
             opt = { selector: opt };
-        var w = { container: document.querySelector(opt.selector) };
+        let w = { container: document.querySelector(opt.selector) };
         w.textarea = w.container.querySelector("textarea");
         w.container.classList.add('liwedit-cont');
 
@@ -35,12 +34,12 @@ class liweditor {
     static comand(c, v) { document.execCommand(c, false, v); }
     //Metodo para validar url
     static validURL(str) {
-        var a = document.createElement('a'); a.href = str;
+        let a = document.createElement('a'); a.href = str;
         return (a.host && a.host != window.location.host);
     }
     //Metodo para obtener html seleccionado
     static getSelection() {
-        var range = document.getSelection().getRangeAt(0),
+        let range = document.getSelection().getRangeAt(0),
             htf = document.createElement("div");
         htf.appendChild(range.cloneContents());
         return htf.innerHTML;
@@ -51,7 +50,7 @@ class liweditor {
     }
     static floating(w) {
         w.container.addEventListener("keydown", function (e) {
-            var code = (e.keyCode ? e.keyCode : e.which);
+            let code = (e.keyCode ? e.keyCode : e.which);
             if (code == 76 && e.altKey)
                 liweditor.float('left');
             else if (code == 82 && e.altKey)
@@ -60,20 +59,20 @@ class liweditor {
     }
     //Metodo para escapar html
     static escapeHTML(c) {
-        var t = document.createTextNode(c);
-        var p = document.createElement('p');
+        let t = document.createTextNode(c);
+        let p = document.createElement('p');
         p.appendChild(t);
         return p.innerHTML;
     }
     //Metodo para obtener id video Youtube
     static youtubeId(url) {
-        var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-        var match = url.match(regExp);
+        let regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+        let match = url.match(regExp);
         return (match && match[7].length == 11) ? match[7] : false;
     }
     //Generamos el contenteditable
     static createEditor(html) {
-        var editor = document.createElement("div");
+        let editor = document.createElement("div");
         editor.setAttribute("contenteditable", "true");
         editor.setAttribute("class", "liwedit-area");
         editor.setAttribute("data-state", "showed");
@@ -82,11 +81,11 @@ class liweditor {
     }
     //Generamos el toolbar
     static createToolbar(w) {
-        var el = document.createElement("div");
+        let el = document.createElement("div");
         el.setAttribute("class", "liwedit-toolbar");
         Object.keys(liweditor.inp).map(function (k) {
-            var v = liweditor.inp[k];
-            var ael = document.createElement(v.type);
+            let v = liweditor.inp[k];
+            let ael = document.createElement(v.type);
             if (v.type == "button")
                 ael.setAttribute("type", "button");
             ael.setAttribute("title", v.title);
@@ -175,7 +174,7 @@ liweditor.inp = {
     img: {
         class: 'btn', type: 'button', event: 'click',
         action: function () {
-            var selection = liweditor.getSelection(), url;
+            let selection = liweditor.getSelection(), url;
             if (liweditor.validURL(selection)) url = selection;
             else url = prompt("Ingrese URL de la imagen");
             if (url) liweditor.comand('insertImage', url);
@@ -186,11 +185,11 @@ liweditor.inp = {
     ytvid: {
         class: 'btn', type: 'button', event: 'click',
         action: function () {
-            var selection = liweditor.getSelection(), url;
+            let selection = liweditor.getSelection(), url;
             if (liweditor.validURL(selection)) url = selection;
             else url = prompt("Ingrese URL del video");
             if (url) {
-                var ht = '<iframe width="650" height="405" src="https://www.youtube.com/embed/' + liweditor.youtubeId(url) + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>\n';
+                let ht = '<iframe width="650" height="405" src="https://www.youtube.com/embed/' + liweditor.youtubeId(url) + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>\n';
                 console.log(ht);
                 liweditor.comand('insertHTML', ht);
             }
@@ -201,7 +200,7 @@ liweditor.inp = {
     link: {
         class: 'btn', type: 'button', event: 'click',
         action: function () {
-            var selection = liweditor.getSelection(), url;
+            let selection = liweditor.getSelection(), url;
             if (liweditor.validURL(selection)) url = selection;
             else url = prompt("Ingrese URL del enlace");
             if (url) {
@@ -240,7 +239,7 @@ liweditor.inp = {
     code: {
         class: 'btn', type: 'button', event: 'click',
         action: function () {
-            var selection = liweditor.getSelection(),
+            let selection = liweditor.getSelection(),
                 hcode = selection ? selection : '<br>';
             hcode = "<pre><code>" + hcode + "</code></pre><p></p>";
             liweditor.comand('insertHTML', hcode);
