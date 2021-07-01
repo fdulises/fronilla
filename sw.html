@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #ts{
+            min-height: 400px;
+            min-width: 400px;
+            height: 400px;
+            width: 400px;
+            max-width: 100%;
+            max-height: 100%;
+            background-color: aqua;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div id="ts" class="objMovible"></div>
+    <script>
+    const toucheel = document.querySelector('#ts');
+    let estoyArrastrando = false;
+    let dobj;
+
+    let cx1, cy1, ct1;
+    let cx2, cy2;
+    let cx0, cy0, ct0;
+    let swipedir;
+
+    function arrastrarRaton(e) {
+        if (estoyArrastrando) {
+            cx2 = e.clientX;
+            cy2 = e.clientY;
+            
+            /*dobj.style.left = newLeft - parseInt(dobj.style.width) / 2;
+            dobj.style.top = newTop - parseInt(dobj.style.height) / 2;*/
+            return false;
+        }
+    }
+
+    function soltarBoton(e) {
+        estoyArrastrando = false;
+
+        cx0 = cx2 - cx1;
+        cy0 = cy2 - cy1;
+        ct0 = new Date().getTime() - ct1;
+        if (ct0 <= 300) {
+            if (Math.abs(cx0) >= 100 && Math.abs(cy0) <= 100) {
+                swipedir = (cx0 < 0) ? 'dleft' : 'dright';
+            }else if (Math.abs(cy0) >= 100 && Math.abs(cx0) <= 100) {
+                swipedir = (cy0 < 0) ? 'dup' : 'ddown';
+            }
+        }
+        dobj.innerHTML = swipedir;
+    }
+
+    function presionarBoton(e) {
+        //Obtenemos el elemento sobre el que se ha presionado el bot�n del rat�n
+        let fobj = e.target;
+        console.log(e.target);
+
+        // Buscamos el primer elemento en la que est� contenido aquel sobre el que se ha pulsado
+        // que pertenezca a la clase objMovible. 
+        while (fobj.tagName.toLowerCase() != "html" && fobj.className != "objMovible") {
+            fobj = fobj.parentNode;
+        }
+
+        // Si hemos obtenido un objeto movible...			
+        if (fobj.className == "objMovible") {
+            // Activamos el flag para indicar que se empieza a arrastrar
+            estoyArrastrando = true;
+            // Guardamos un puntero al objeto que se est� moviendo en la variable global
+            dobj = fobj;
+            
+            cx1 = e.clientX;
+            cy1 = e.clientY;
+            ct1 = new Date().getTime();
+
+            // Devolvemos false para no realizar ninguna acci�n posterior
+            return false;
+        }
+    }
+
+    document.onmousedown = presionarBoton;
+    document.onmouseup = soltarBoton;
+    document.onmousemove = arrastrarRaton;
+
+    function swipedetect(el, callback) {
+        let touchsurface = el;
+        let swipedir;
+        let startX;
+        let startY;
+        let distX;
+        let distY;
+        let threshold = 150; //required min distance traveled to be considered swipe
+        let restraint = 100; // maximum distance allowed at the same time in perpendicular direction
+        let allowedTime = 300; // maximum time allowed to travel that distance
+        let elapsedTime;
+        let startTime;
+
+        touchsurface.addEventListener('touchstart', function (e) {
+            let touchobj = e.changedTouches[0];
+            swipedir = 'none';
+            dist = 0;
+            startX = touchobj.pageX;
+            startY = touchobj.pageY;
+            startTime = new Date().getTime(); // record time when finger first makes contact with surface
+            e.preventDefault();
+        }, false)
+
+        touchsurface.addEventListener('touchmove', function (e) {
+            e.preventDefault(); // prevent scrolling when inside DIV
+        }, false)
+
+        touchsurface.addEventListener('touchend', function (e) {
+            let touchobj = e.changedTouches[0];
+            distX = touchobj.pageX - startX; // get horizontal dist traveled by finger while in contact with surface
+            distY = touchobj.pageY - startY; // get vertical dist traveled by finger while in contact with surface
+            elapsedTime = new Date().getTime() - startTime; // get time elapsed
+            if (elapsedTime <= allowedTime) { // first condition for awipe met
+                if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) { // 2nd condition for horizontal swipe met
+                    swipedir = (distX < 0) ? 'mleft' : 'mright'; // if dist traveled is negative, it indicates left swipe
+                }
+                else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint) { // 2nd condition for vertical swipe met
+                    swipedir = (distY < 0) ? 'mup' : 'mdown'; // if dist traveled is negative, it indicates up swipe
+                }
+            }
+            callback(swipedir);
+            e.preventDefault();
+        }, false)
+    }
+
+    swipedetect(document.querySelector("#ts"), function (swipedir) {
+        document.querySelector("#ts").innerHTML = swipedir;
+    });
+    </script>
+</body>
+</html>
