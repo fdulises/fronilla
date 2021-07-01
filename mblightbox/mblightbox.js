@@ -39,7 +39,7 @@ class mblightbox{
 }
 class mblalert extends mblightbox {
     constructor(body) {
-        let cont = `<div class="mlb-card">
+        const cont = `<div class="mlb-card">
             <div class="mlb-body">${body}</div>
             <div class="mlb-footer">
                 <button type="button" class="mlb-btn mlb-acept">Aceptar</button>
@@ -51,7 +51,7 @@ class mblalert extends mblightbox {
 }
 class mblconfirm extends mblightbox{
     constructor(param){
-        let cont = `<div class="mlb-card">
+        const cont = `<div class="mlb-card">
             <div class="mlb-header">
                 <h4>${param.header}</h4>
                 <button type="button" class="mlb-close">×</button>
@@ -76,16 +76,15 @@ class mblconfirm extends mblightbox{
 }
 class imglb{
     constructor(selector) {
-        let els = document.querySelectorAll(selector);
+        const els = document.querySelectorAll(selector);
         els.forEach(t=>{
-            const mblbg = new mblightbox;
-            let cont = `
+            const cont = `
                 <div class="imglbcont">
                 <button type="button" class="mlb-close">×</button>
                 <img src="${t.src}">
                 </div>
             `;
-            mblbg.setContent(cont);
+            const mblbg = new mblightbox(cont);
             mblbg.container.querySelector('.mlb-close').addEventListener('click', mblbg.hide);
             t.addEventListener("click", mblbg.show);
         });

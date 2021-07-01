@@ -88,6 +88,7 @@
 .mlb-hide{
     display: none;
 }
+/* -- IMG lightbox -- */
 .imglbcont img{
     max-width: 100%;
 }
