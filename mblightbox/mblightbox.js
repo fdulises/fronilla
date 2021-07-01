@@ -14,12 +14,16 @@ class mblightbox{
     remove = ()=> document.body.removeChild(this.container);
 
     //Metodo para abrir lightbox
-    show = ()=> this.container.classList.remove('mlb-hide');
+    show = ()=> {
+        this.container.classList.remove('mlb-hide');
+        document.body.style.overflow = 'hidden';
+    }
 
     //Metodo para cerrar lightbox
     hide = ()=>{
         /*setTimeout(()=>this.container.classList.add('mlb-hide'), 600);*/
         this.container.classList.add('mlb-hide');
+        document.body.style.overflow = 'auto';
     }
 
     //Metodo para agregar contenido al lightbox
@@ -61,29 +65,29 @@ class mblconfirm extends mblightbox{
         super(cont);
         this.container.querySelector('.mlb-close').addEventListener('click', this.hide);
         this.container.querySelector('.mlb-cancel').addEventListener('click', () => {
-            param.action(false);
             this.hide();
+            param.action(false);
         });
         this.container.querySelector('.mlb-acept').addEventListener('click', () => {
-            param.action(true);
             this.hide();
+            param.action(true);
         });
     }
 }
-class imglb extends mblightbox {
+class imglb{
     constructor(selector) {
         let els = document.querySelectorAll(selector);
-        /*els.forEach(t=>{
-            img1.addEventListener("click", myimglb.show);
-        });*/
-        let cont = `
-            <div class="imglbcont">
-            <button type="button" class="mlb-close">×</button>
-            <img src = "${els[0].src}">
-            </div>
-        `;
-        super(cont);
-        this.container.querySelector('.mlb-close').addEventListener('click', this.hide);
-        els[0].addEventListener("click", this.show);
+        els.forEach(t=>{
+            const mblbg = new mblightbox;
+            let cont = `
+                <div class="imglbcont">
+                <button type="button" class="mlb-close">×</button>
+                <img src="${t.src}">
+                </div>
+            `;
+            mblbg.setContent(cont);
+            mblbg.container.querySelector('.mlb-close').addEventListener('click', mblbg.hide);
+            t.addEventListener("click", mblbg.show);
+        });
     }
 }
