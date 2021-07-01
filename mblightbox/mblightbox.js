@@ -26,9 +26,9 @@ class mblightbox{
     setContent = cont =>{
         if (typeof cont == 'string'){
             this.container.innerHTML = cont;
-            this.container.firstChild.addEventListener('click', (e)=>e.stopPropagation());
+            this.container.firstChild.addEventListener('click', function (e) { e.stopPropagation() });
         }else{
-            cont.addEventListener('click', e=>e.stopPropagation());
+            cont.addEventListener('click', function (e) { e.stopPropagation()});
             this.container.appendChild(cont);
         }
     }
@@ -68,5 +68,22 @@ class mblconfirm extends mblightbox{
             param.action(true);
             this.hide();
         });
+    }
+}
+class imglb extends mblightbox {
+    constructor(selector) {
+        let els = document.querySelectorAll(selector);
+        /*els.forEach(t=>{
+            img1.addEventListener("click", myimglb.show);
+        });*/
+        let cont = `
+            <div class="imglbcont">
+            <button type="button" class="mlb-close">×</button>
+            <img src = "${els[0].src}">
+            </div>
+        `;
+        super(cont);
+        this.container.querySelector('.mlb-close').addEventListener('click', this.hide);
+        els[0].addEventListener("click", this.show);
     }
 }

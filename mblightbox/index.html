@@ -12,6 +12,10 @@
     <p>Lorem ipsum dolor sit amet</p>
     <button id="showalert" type="button">Mostrar alert</button>
     <button id="showaconfirm" type="button">Confirmar</button>
+    <section>
+        <br>
+        <img src="../media/img/img1.jpg" width="350" alt="" class="singlelb">
+    </section>
 
     <script>
         window.addEventListener("DOMContentLoaded", ()=>{
@@ -31,6 +35,9 @@
                 }
             });
             document.querySelector("#showaconfirm").addEventListener("click", myconfirm.show);
+
+            //Creamos un lightbox para imagenes
+            const myimglb = new imglb('.singlelb');
         });
     </script>
     <script src="mblightbox.js"></script>
