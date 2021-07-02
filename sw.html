@@ -34,7 +34,7 @@
     <div id="ts"></div>
     <div id="ts2"></div>
     <script>
-    function liswiping(el, callback){
+    function liswiping({el, callback, threshold= 150, restraint= 100, allowedTime= 300}){
         const toucheel = document.querySelector(el);
         let ismoving = false;
         let swipedir;
@@ -42,9 +42,9 @@
         let cx2, cy2;
         let distX, distY;
 
-        let threshold = 150; //required min distance traveled to be considered swipe
-        let restraint = 100; // maximum distance allowed at the same time in perpendicular direction
-        let allowedTime = 300; // maximum time allowed to travel that distance
+        //let threshold = 150; //required min distance traveled to be considered swipe
+        //let restraint = 100; // maximum distance allowed at the same time in perpendicular direction
+        //let allowedTime = 300; // maximum time allowed to travel that distance
 
         toucheel.addEventListener('mousedown', function (e) {
             ismoving = true;
@@ -117,11 +117,13 @@
             });
         });
     }
-    liswiping('#ts', function(p){
-        p.element.innerHTML = p.swipedir + ' X:' + p.distX + ' Y:' + p.distY;
+    liswiping({
+        el: '#ts',
+        callback: p=> p.element.innerHTML = p.swipedir + ' X:' + p.distX + ' Y:' + p.distY
     });
-    liswiping('#ts2', function (p) {
-        p.element.innerHTML = p.swipedir + ' X:' + p.distX + ' Y:' + p.distY;
+    liswiping({
+        el: '#ts2',
+        callback: p=> p.element.innerHTML = p.swipedir + ' X:' + p.distX + ' Y:' + p.distY
     });
     </script>
 </body>
