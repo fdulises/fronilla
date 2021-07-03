@@ -4,27 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="mblightbox.css">
-    <link rel="stylesheet" href="../theme/css/main.css">
+    <title>Ventanas modales</title>
+    <link rel="stylesheet" href="theme/css/main.css">
+    <link rel="stylesheet" href="theme/css/lilightbox.css">
 </head>
 <body>
-    <h1>Lorem ipsum dolor sit amet</h1>
-    <p>Lorem ipsum dolor sit amet</p>
-    <button id="showalert" type="button">Mostrar alert</button>
-    <button id="showaconfirm" type="button">Confirmar</button>
+    <main class="container">
+        <h1>Lorem ipsum dolor sit amet</h1>
+        <p>Lorem ipsum dolor sit amet</p>
+        <button id="showalert" type="button">Mostrar alert</button>
+        <button id="showaconfirm" type="button">Confirmar</button>
+    </main>
 
     <script>
-        window.addEventListener("DOMContentLoaded", ()=>{
+        document.addEventListener("DOMContentLoaded", ()=>{
             //Creamos nuestro alert personalizado y lo asignamos a un boton
-            const myalert = new mblalert("Una alerta simple");
+            const myalert = new lialert("Una alerta simple");
             document.querySelector("#showalert").addEventListener("click", myalert.show);
 
             //Creamos otro confirm personalizado que usaremos mas adelante
-            const accionConfirmada = new mblalert("El archivo se ha eliminado correctamente!");
+            const accionConfirmada = new lialert("El archivo se ha eliminado correctamente!");
 
             //Creamos nuestro confirm personalizado y lo asignamos a un boton
-            const myconfirm = new mblconfirm({
+            const myconfirm = new liconfirm({
                 header: "Estas apunto de eliminar un archivo",
                 body: "Realmente deseas continuar?",
                 action: (result) => {
@@ -34,6 +36,6 @@
             document.querySelector("#showaconfirm").addEventListener("click", myconfirm.show);
         });
     </script>
-    <script src="mblightbox.js"></script>
+    <script src="theme/js/lilightbox.js"></script>
 </body>
 </html>

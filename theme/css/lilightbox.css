@@ -1,9 +1,10 @@
-.mlb-container *, .mlb-container *::after, .mlb-container *::before{
+/* -- liwindow -- */
+.liwindow-container *, .liwindow-container *::after, .liwindow-container *::before{
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
-.mlb-container{
+.liwindow-container{
     position: fixed;
     top: 0;
     left: 0;
@@ -12,22 +13,23 @@
     height: 100%;
     z-index: 200;
 }
-.mlb-card{
+/* -- liwindow Modal Dialog -- */
+.liwindow-card{
     margin: 0 auto;
     margin-top: 40px;
     width: 500px;
     max-width: 100%;
     box-shadow: 0px 0px 25px -5px #333;
 }
-.mlb-header, .mlb-footer, .mlb-body{
+.liwindow-header, .liwindow-footer, .liwindow-body{
     background-color: #fff;
 }
-.mlb-header{
+.liwindow-header{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-.mlb-close{
+.liwindow-close{
     padding: 20px;
     display: inline-block;
     font-size: 1.33rem;
@@ -37,34 +39,34 @@
     border: none;
     transition: 0.3s all;
 }
-.mlb-close:hover, .mlb-close:focus{
+.liwindow-close:hover, .liwindow-close:focus{
     color: #7C4DFF;
     background-color: #f3f3f3;
 }
-.mlb-close:active{
+.liwindow-close:active{
     color: #7C4DFF;
     transform: translate(-3px, -3px);
     transform: scale(0.9);
 }
-.mlb-close:focus{
+.liwindow-close:focus{
     outline: 1px solid #00BCD4;
 }
-.mlb-body{
+.liwindow-body{
     padding: 20px;
     color: #333;
     font-size: 18px;
 }
-.mlb-header h4{
+.liwindow-header h4{
     color: #333;
     padding: 20px;
     display: inline-block;
     font-size: 25px;
     font-weight: bold;
 }
-.mlb-footer{
+.liwindow-footer{
     text-align: right;
 }
-.mlb-btn{
+.liwindow-btn{
     padding: 20px;
     background-color: transparent;
     border: none;
@@ -73,50 +75,55 @@
     font-size: 15px;
     transition: 0.3s all;
 }
-.mlb-btn:hover, .mlb-btn:focus{
+.liwindow-btn:hover, .liwindow-btn:focus{
     color: #7C4DFF;
     background-color: #f3f3f3;
 }
-.mlb-btn:active{
+.liwindow-btn:active{
     color: #7C4DFF;
     transform: translate(-3px, -3px);
     transform: scale(0.9);
 }
-.mlb-btn:focus{
+.liwindow-btn:focus{
     outline: 1px solid #00BCD4;
 }
-.mlb-hide{
+.liwindow-hide{
     display: none;
 }
-/* -- IMG lightbox -- */
-.imglbcont img{
+/* -- lilightbox -- */
+.lilightbox img{
     max-width: 100%;
 }
-.imglbcont{
+.lilightbox{
     width: 100%;
     height: 100%;
     overflow: auto;
 }
-.imglbcont .mlb-close{
+.lilightbox .lilightbox-close{
     font-size: 1.55rem;
     position: absolute;
     left: 0;
     top: 0;
     color: #e0e0e0;
     text-shadow: 0px 1px 2px #333;
+    padding: 20px;
+    display: inline-block;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+    transition: 0.3s all;
 }
-.imglbcont .mlb-close:hover{
+.lilightbox .lilightbox-close:hover{
     color: #FFC107;
     background-color: transparent;
 }
-
-/* -- Img Lightbox -- */
-.lislide{
+/* -- lislideshow -- */
+.lislideshow{
     margin: 0;
     padding: 0;
     list-style: none;
 }
-.lislide {
+.lislideshow {
     width: 100%;
     position: relative;
     transition: height 0.5s;
@@ -124,25 +131,25 @@
     display: block;
     z-index: 1;
 }
-.lislide li {
+.lislideshow li {
     position: absolute;
     transition: 0.5s all;
     opacity: 0;
     z-index: 1;
     display: block;
 }
-.lislide li.active  {
+.lislideshow li.active  {
     opacity: 1;
     z-index: 10;
 }
-.lislide-cont {
+.lislideshow-cont {
     width: 100%;
     position: relative;
     overflow: hidden;
 }
-.lislide-btn.btprev{left: 0;}
-.lislide-btn.btnext{right: 0;}
-.lislide-btn {
+.lislideshow-btn.btprev{left: 0;}
+.lislideshow-btn.btnext{right: 0;}
+.lislideshow-btn {
 	font-size: 2.77rem;
 	position: absolute;
 	top: 0;
@@ -155,6 +162,6 @@
     color: #e0e0e0;
     text-shadow: 0px 1px 2px #333;
 }
-.lislide-btn:hover{
+.lislideshow-btn:hover{
     color: #FFC107;
 }

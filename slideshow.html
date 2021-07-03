@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanilla Slideshow</title>
+    <link rel="stylesheet" href="theme/css/main.css">
+    <link rel="stylesheet" href="theme/css/lilightbox.css">
+</head>
+<body>
+    <main class="container">
+        <h1 style="text-align: center;">Vanilla Slideshow</h1>
+        <div class="lislideshow-cont">
+            <ul id="myslideshow" class="lislideshow">
+                <li>
+                    <a href="media/img/img1.jpg" rel="media/img/img1.jpg" class="mylbselector"><img src="media/img/img1.jpg" alt=""></a>
+                </li>
+                <li>
+                    <a href="media/img/img2.jpg" rel="media/img/img2.jpg" class="mylbselector"><img src="media/img/img2.jpg" alt=""></a>
+                </li>
+                <li>
+                    <a href="media/img/img3.jpg" rel="media/img/img3.jpg" class="mylbselector"><img src="media/img/img3.jpg" alt=""></a>
+                </li>
+                <li>
+                    <a href="media/img/img4.jpg" rel="media/img/img4.jpg" class="mylbselector"><img src="media/img/img4.jpg" alt=""></a>
+                </li>
+                <li>
+                    <a href="media/img/img5.jpg" rel="media/img/img5.jpg" class="mylbselector"><img src="media/img/img5.jpg" alt=""></a>
+                </li>
+            </ul>
+            <button type="button" class="lislideshow-btn btprev">&laquo;</button>
+            <button type="button" class="lislideshow-btn btnext">&raquo;</button>
+        </div>
+    </main>
+    <script src="theme/js/lilightbox.js"></script>
+    <script src="theme/js/lislideshow.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', ()=>{
+            //Img lightbox
+            const myimglb = new lilightbox('.mylbselector');
+
+            //Slideshow
+            const myslide = new lislideshow({sel: '#myslideshow'});
+            document.querySelector('.btnext').addEventListener('click', myslide.next);
+            document.querySelector('.btprev').addEventListener('click', myslide.prev);
+        });
+    </script>
+</body>
+</html>
