@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="mblightbox.css">
+    <link rel="stylesheet" href="../theme/css/main.css">
+</head>
+<body>
+    <main class="container">
+        <h1 style="text-align: center;">Vanilla Slideshow</h1>
+        <div class="lislide-cont">
+            <ul class="lislide">
+                <li><a href="../media/img/img1.jpg" class="limglb"><img src="../media/img/img1.jpg" alt=""></a></li>
+                <li><a href="../media/img/img2.jpg" class="limglb"><img src="../media/img/img2.jpg" alt=""></a></li>
+                <li><a href="../media/img/img3.jpg" class="limglb"><img src="../media/img/img3.jpg" alt=""></a></li>
+                <li><a href="../media/img/img4.jpg" class="limglb"><img src="../media/img/img4.jpg" alt=""></a></li>
+                <li><a href="../media/img/img5.jpg" class="limglb"><img src="../media/img/img5.jpg" alt=""></a></li>
+            </ul>
+            <button type="button" class="lislide-btn btprev">&laquo;</button>
+            <button type="button" class="lislide-btn btnext">&raquo;</button>
+        </div>
+    </main>
+    <script src="mblightbox.js"></script>
+    <script src="../theme/js/liswiping.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', ()=>{
+            //Creamos un lightbox para imagenes
+            const myimglb = new imglb({sel:'.limglb', url:'href'});
+
+            const myslide = new lislideshow({sel: '.lislide'});
+
+            document.querySelector('.btnext').addEventListener('click', myslide.next);
+            document.querySelector('.btprev').addEventListener('click', myslide.prev);
+            // liswiping({
+            //     el: '.lislide',
+            //     callback: p=>{
+            //         switch (p.swipedir){
+            //             case 'left':
+            //                 myslide.prev();
+            //                 break;
+            //             case 'right':
+            //                 myslide.next();
+            //                 break;
+            //         }
+            //     }
+            // });
+        });
+    </script>
+</body>
+</html>

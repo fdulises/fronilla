@@ -75,18 +75,54 @@ class mblconfirm extends mblightbox{
     }
 }
 class imglb{
-    constructor(selector) {
-        const els = document.querySelectorAll(selector);
+    constructor({sel, url='src'}) {
+        const els = document.querySelectorAll(sel);
         els.forEach(t=>{
             const cont = `
                 <div class="imglbcont">
                 <button type="button" class="mlb-close">×</button>
-                <img src="${t.src}">
+                <img src="${t[url]}">
                 </div>
             `;
             const mblbg = new mblightbox(cont);
             mblbg.container.querySelector('.mlb-close').addEventListener('click', mblbg.hide);
-            t.addEventListener("click", mblbg.show);
+            t.addEventListener("click", e=>{
+                e.preventDefault();
+                mblbg.show();
+            });
         });
+    }
+}
+
+class lislideshow{
+    constructor({ sel, active = 0 }){
+        this.cont = document.querySelector(sel);
+        this.elements = this.cont.querySelectorAll('li');
+        this.length = this.elements.length;
+        this.active = active;
+
+        //Mostramos elemento activo
+        this.elements[this.active].classList.add('active');
+        window.addEventListener('load', e => {
+            this.cont.style.height = this.cont.querySelector('.active').offsetHeight + "px";
+        });
+    }
+    next = ()=>{
+        this.elements[this.active].classList.remove('active');
+
+        if (this.active < this.length-1 ) this.active++;
+        else this.active = 0;
+
+        this.elements[this.active].classList.add('active');
+        this.cont.style.height = this.cont.querySelector('.active').offsetHeight + "px";
+    }
+    prev = ()=>{
+        this.elements[this.active].classList.remove('active');
+
+        if (this.active > 0) this.active--;
+        else this.active = this.length-1;
+
+        this.elements[this.active].classList.add('active');
+        this.cont.style.height = this.cont.querySelector('.active').offsetHeight + "px";
     }
 }

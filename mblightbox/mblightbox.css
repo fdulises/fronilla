@@ -109,3 +109,52 @@
     color: #FFC107;
     background-color: transparent;
 }
+
+/* -- Img Lightbox -- */
+.lislide{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.lislide {
+    width: 100%;
+    position: relative;
+    transition: height 0.5s;
+    overflow: hidden;
+    display: block;
+    z-index: 1;
+}
+.lislide li {
+    position: absolute;
+    transition: 0.5s all;
+    opacity: 0;
+    z-index: 1;
+    display: block;
+}
+.lislide li.active  {
+    opacity: 1;
+    z-index: 10;
+}
+.lislide-cont {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.lislide-btn.btprev{left: 0;}
+.lislide-btn.btnext{right: 0;}
+.lislide-btn {
+	font-size: 2.77rem;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 15%;
+	z-index: 15;
+	background-color: transparent;
+	border: none;
+	padding: 0;
+    color: #e0e0e0;
+    text-shadow: 0px 1px 2px #333;
+}
+.lislide-btn:hover{
+    color: #FFC107;
+}
