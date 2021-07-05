@@ -1,11 +1,9 @@
 let dynlist = {
     js: [
         'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js',
-        'http://fronilla.test/liweditor/editor.js',
     ],
     css: [
         'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css',
-        'http://fronilla.test/liweditor/editor.css'
     ],
     head: [
         'head.html'

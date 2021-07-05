@@ -91,8 +91,10 @@
     display: none;
 }
 /* -- lilightbox -- */
-.lilightbox img{
-    max-width: 100%;
+.lilightbox img {
+	max-width: 100%;
+	margin: 0 auto;
+	display: block;
 }
 .lilightbox{
     width: 100%;

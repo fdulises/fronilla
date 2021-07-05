@@ -81,16 +81,16 @@ class liconfirm extends liwindow{
 class lilightbox{
     constructor(sel) {
         document.querySelectorAll(sel).forEach(t=>{
-            const cont = `
-                <div class="lilightbox">
-                    <button type="button" class="lilightbox-close">×</button>
-                    <img src="${t.rel}">
-                </div>
-            `;
-            const liw = new liwindow(cont);
-            liw.container.querySelector('.lilightbox-close').addEventListener('click', liw.hide);
             t.addEventListener("click", e=>{
                 e.preventDefault();
+                const cont = `
+                    <div class="lilightbox">
+                        <button type="button" class="lilightbox-close">×</button>
+                        <img src="${t.rel}">
+                    </div>
+                `;
+                const liw = new liwindow(cont);
+                liw.container.querySelector('.lilightbox-close').addEventListener('click', liw.hide);
                 liw.show();
             });
         });
