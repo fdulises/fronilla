@@ -13,6 +13,9 @@
     height: 100%;
     z-index: 200;
 }
+.liwindow-hide{
+    display: none;
+}
 /* -- liwindow Modal Dialog -- */
 .liwindow-card{
     margin: 0 auto;
@@ -86,9 +89,6 @@
 }
 .liwindow-btn:focus{
     outline: 1px solid #00BCD4;
-}
-.liwindow-hide{
-    display: none;
 }
 /* -- lilightbox -- */
 .lilightbox img {
