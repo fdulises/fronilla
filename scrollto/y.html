@@ -9,11 +9,15 @@
         *{
             box-sizing: border-box;
         }
+        body{margin:0}
         .scy{
             overflow: auto;
             white-space: nowrap;
-            width: 600px;
             max-width: 100%;
+            position: -webkit-sticky;
+            position: sticky;
+            top: -1px;
+            background-color: white;
         }
         .scy ul{
             margin: 0;
@@ -21,10 +25,12 @@
         }
         .scy li{
             display: inline-block;
-            width: 300px;
             outline: 3px dashed green;
-            padding: 10px 10px;
             margin: 10px 10px;
+        }
+        .scy li a{
+            display: block;
+            padding: 10px 10px;
         }
     </style>
 </head>
@@ -39,13 +45,15 @@
 <button type="button" id="baction">Mover</button>
     <div class="scy">
         <ul id="containerx">
-            <li>Elemento 1</li>
-            <li>Elemento 2</li>
-            <li>Elemento 3</li>
-            <li>Elemento 4</li>
-            <li>Elemento 5</li>
+            <li><a class="btnscrollto" href="#seccion1">Seccion #1</a></li>
+            <li><a class="btnscrollto" href="#seccion2">Seccion #2</a></li>
+            <li><a class="btnscrollto" href="#seccion3">Seccion #3</a></li>
+            <li><a class="btnscrollto" href="#seccion4">Seccion #4</a></li>
+            <li><a class="btnscrollto" href="#seccion5">Seccion #5</a></li>
         </ul>
     </div>
+    
+    <h2 id="seccion1">Seccion #1</h2>
     
     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
     
@@ -57,11 +65,13 @@
         vitae, justo.</p>
     
     <p>Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.</p>
-    <h2 id="seccion1">Sección #1</h2>
+    
     <p>Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
     
     <p>Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.
         Quisque rutrum.</p>
+    
+    <h2 id="seccion2">Sección #2</h2>
     
     <p>Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.
     </p>
@@ -70,6 +80,7 @@
     </p>
     
     <p>Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus.</p>
+    
     
     <p>Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt.
         Duis leo.</p>
@@ -80,6 +91,8 @@
         eleifend sapien.</p>
     
     <p>Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui.</p>
+    
+    <h2 id="seccion3">Seccion #3</h2>
     
     <p>Cras ultricies mi eu turpis hendrerit fringilla.</p>
     
@@ -98,6 +111,8 @@
     
     <p>Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu.
         Phasellus accumsan cursus velit.</p>
+    
+    <h2 id="seccion4">Seccion #4</h2>
     
     <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis
         porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci.</p>
@@ -134,8 +149,6 @@
     <p>Phasellus gravida semper nisi. Nullam vel sem. Pellentesque libero tortor, tincidunt et, tincidunt eget, semper nec,
         quam. Sed hendrerit. Morbi ac felis.</p>
     
-    <h2 id="seccion2">Seccion #2</h2>
-    
     <p>Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede.</p>
     
     <p>Donec interdum, metus et hendrerit aliquet, dolor diam sagittis ligula, eget egestas libero turpis vel mi. Nunc
@@ -149,6 +162,8 @@
     
     <p>Vestibulum ullamcorper mauris at ligula. Fusce fermentum. Nullam cursus lacinia erat. Praesent blandit laoreet nibh.
         Fusce convallis metus id felis luctus adipiscing.</p>
+    
+    <h2 id="seccion5">Seccion #5</h2>
     
     <p>Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est.
         Quisque id mi. Ut tincidunt tincidunt erat. Etiam feugiat lorem non metus.</p>
@@ -172,6 +187,7 @@
         <a id="btnsubir" href="#">Ir arriba</a>
     </footer>
 
+    <script src="liscrollto.js"></script>
     <script src="y.js"></script>
 </body>
 </html>
