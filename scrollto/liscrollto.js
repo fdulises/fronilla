@@ -47,6 +47,7 @@ function liOffset(el) {
     return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
 }
 
+//Implementar ejemplos con el efecto scrollto
 window.addEventListener('load', () => {
     //Algoritmo Ir abajo
     document.querySelector("#btnbajar").addEventListener("click", function (e) {
