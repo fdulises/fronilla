@@ -48,7 +48,6 @@ const updateMarker = (target) => {
     active = header.querySelector('a[href="#' + target.id + '"]');
     active.classList.add('active');
 
-    console.log(target);
 }
 
 // document.addEventListener('readystatechange', e => {

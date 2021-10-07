@@ -46,3 +46,10 @@ function liOffset(el) {
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
 }
+
+//Transformar scroll vertical en horizontal
+function transformScroll(event) {
+    if (!event.deltaY) return;
+    event.currentTarget.scrollLeft += event.deltaY + event.deltaX;
+    event.preventDefault();
+}

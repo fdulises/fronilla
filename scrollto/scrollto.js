@@ -1,12 +1,5 @@
-//Transformar scroll vertical en horizontal
-function transformScroll(event) {
-    if (!event.deltaY) return;
-    event.currentTarget.scrollLeft += event.deltaY + event.deltaX;
-    event.preventDefault();
-}
-
 //Implementar ejemplos con el efecto scrollto
-document.addEventListener('DOMContentLoaded', function(){
+window.addEventListener('load', function(){
 
     //Algoritmo Ir abajo
     document.querySelector("#btnbajar").addEventListener("click", function (e) {
@@ -38,21 +31,21 @@ document.addEventListener('DOMContentLoaded', function(){
         });
     }
 
-    let verticalcont = document.querySelector('.scy');
+    let horcont = document.querySelector('.scy');
     
-    verticalcont.addEventListener('wheel', transformScroll);
+    horcont.addEventListener('wheel', transformScroll);
 
-    let verticalitems = verticalcont.querySelectorAll('li');
+    let verticalitems = horcont.querySelectorAll('li');
     for( let i = 0; i < verticalitems.length; i++){
         verticalitems[i].setAttribute('data-px', verticalitems[i].getBoundingClientRect().x);
         verticalitems[i].addEventListener('click', function (){
             let posicionx = this.getBoundingClientRect().x;
             let ancho = this.offsetWidth;
-            let ancho_cont = verticalcont.offsetWidth;
+            let ancho_cont = horcont.offsetWidth;
             let espacio = (ancho_cont - ancho)/2;
 
-            let distancia = (verticalcont.scrollLeft + posicionx)-espacio;
-            verticalcont.scroll({
+            let distancia = (horcont.scrollLeft + posicionx)-espacio;
+            horcont.scroll({
                 left: distancia,
                 behavior: 'smooth'
             });
