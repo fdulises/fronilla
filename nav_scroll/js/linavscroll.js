@@ -9,7 +9,7 @@ new liNavScroll({
 */
 class liNavScroll {
 
-    constructor({ nav_container, section_selector, active_class, root_container }) {
+    constructor({ nav_container, section_selector, active_class, root_container, threshold = 0.25 }) {
         this.nav_container = document.querySelector(nav_container);
         this.section_selector = document.querySelectorAll(section_selector);
         this.active_class = active_class;
@@ -21,6 +21,7 @@ class liNavScroll {
         new liScrollObserver({
             root_container: root_container,
             section_selector: section_selector,
+            threshold: threshold,
             callback: (target) => {
                 this.updateMarker({
                     target: "#" + target.id,
@@ -32,8 +33,12 @@ class liNavScroll {
     }
 
     generateLink(section) {
-        let link = document.createElement("a");
-        link.innerHTML = section.innerHTML;
+        const link = document.createElement("a");
+
+        let link_text = section.getAttribute("data-navsection-title");
+        if (!link_text) link_text = section.innerHTML;
+
+        link.innerHTML = link_text;
         link.href = "#" + section.id;
 
         link.addEventListener("click", e => {
@@ -79,18 +84,19 @@ class liNavScroll {
 
 /* ----- Implementación de la api IntersectionObserver ----- */
 class liScrollObserver{
-    constructor({ section_selector, root_container, callback}){
+    constructor({ section_selector, root_container, callback, threshold}){
         this.sections = [...document.querySelectorAll(section_selector)];
         this.root_container = document.querySelector(root_container);
         this.callback = callback;
+        this.threshold = threshold;
 
-        this.prevYPosition = 0;
-        this.direction = 'up';
+        this.prevYPosition = this.root_container.scrollTop;
+        //this.direction = 'down';
 
         this.observer = new IntersectionObserver(this.onIntersect, {
             root: this.root_container,
             rootMargin: '0px 0px',
-            threshold: 0.75
+            threshold: threshold
         });  
 
         this.sections.forEach((section) => {
@@ -108,11 +114,13 @@ class liScrollObserver{
         }
     }
     shouldUpdate = (entry) => {
-        if (this.direction === 'down' && entry.intersectionRatio <= 0.75) {
+        console.log({target: entry.target, direction: this.direction, ratio: entry.intersectionRatio})
+
+        if (this.direction === 'down' && entry.intersectionRatio <= this.threshold) {
             return true;
         }
 
-        if (this.direction === 'up' && entry.intersectionRatio >= 0.75) {
+        if (this.direction === 'up' && entry.intersectionRatio >= this.threshold) {
             return true;
         }
 
@@ -120,7 +128,7 @@ class liScrollObserver{
     }
 
     onIntersect = (entries, observer) => {
-        entries.forEach((entry) => {
+        entries.reverse().forEach((entry) => {
             if (this.root_container.scrollTop > this.prevYPosition) this.direction = 'down';
             else this.direction = 'up';
 
