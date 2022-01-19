@@ -9,7 +9,7 @@ new liNavScroll({
 */
 class liNavScroll {
 
-    constructor({ nav_container, section_selector, active_class, root_container, threshold = 0.25 }) {
+    constructor({ nav_container, section_selector, active_class, root_container, threshold = 0.25, rootMargin = '0px 0px' }) {
         this.nav_container = document.querySelector(nav_container);
         this.section_selector = document.querySelectorAll(section_selector);
         this.active_class = active_class;
@@ -22,6 +22,7 @@ class liNavScroll {
             root_container: root_container,
             section_selector: section_selector,
             threshold: threshold,
+            rootMargin: rootMargin,
             callback: (target) => {
                 this.updateMarker({
                     target: "#" + target.id,
@@ -84,24 +85,21 @@ class liNavScroll {
 
 /* ----- Implementación de la api IntersectionObserver ----- */
 class liScrollObserver{
-    constructor({ section_selector, root_container, callback, threshold}){
+    constructor({ section_selector, root_container, callback, threshold, rootMargin = '0px 0px'}){
         this.sections = [...document.querySelectorAll(section_selector)];
         this.root_container = document.querySelector(root_container);
         this.callback = callback;
         this.threshold = threshold;
 
         this.prevYPosition = this.root_container.scrollTop;
-        //this.direction = 'down';
 
         this.observer = new IntersectionObserver(this.onIntersect, {
             root: this.root_container,
-            rootMargin: '0px 0px',
+            rootMargin: rootMargin,
             threshold: threshold
         });  
 
-        this.sections.forEach((section) => {
-            this.observer.observe(section);
-        });
+        this.sections.forEach(section => this.observer.observe(section));
     }
 
     getTargetSection = (entry) => {
@@ -114,8 +112,6 @@ class liScrollObserver{
         }
     }
     shouldUpdate = (entry) => {
-        console.log({target: entry.target, direction: this.direction, ratio: entry.intersectionRatio})
-
         if (this.direction === 'down' && entry.intersectionRatio <= this.threshold) {
             return true;
         }
