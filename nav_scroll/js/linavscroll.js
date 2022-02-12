@@ -9,12 +9,13 @@ new liNavScroll({
 */
 class liNavScroll {
 
-    constructor({ nav_container, section_selector, active_class, root_container, threshold = 0.25, rootMargin = '0px 0px' }) {
+    constructor({ nav_container, section_selector, active_class, root_container, threshold = 0.25, offset = 0, rootMargin = '0px 0px' }) {
         this.nav_container = document.querySelector(nav_container);
         this.section_selector = document.querySelectorAll(section_selector);
         this.active_class = active_class;
         this.root_container = root_container || 'body';
         this.root_container = document.querySelector(root_container);
+        this.offset = offset;
 
         this.generateNav();
 
@@ -47,8 +48,10 @@ class liNavScroll {
 
             const destino = liOffset(section, this.root_container);
 
+            console.log(destino.top + this.offset )
+
             liScrollTo({
-                to: destino.top,
+                to: destino.top + this.offset,
                 root: this.root_container,
                 callback: () => {
                     this.updateMarker({
