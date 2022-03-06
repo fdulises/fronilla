@@ -1,0 +1,8 @@
+poder seleccionar un dia
+poder seleccionar intervalos consecutivos entre dos días
+poder decidir en que día empezar semana D || L
+deseleccionar día al hacer click en el
+
+poder definir cuantos meses mostrar
+
+tras hacer seleccion, mandar fecha de inicio y fecha de fin a input

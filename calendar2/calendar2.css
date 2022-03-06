@@ -1,0 +1,91 @@
+body{margin: 0}
+.liyeartable *, .liyeartable *::after, .liyeartable *::before{
+    box-sizing: border-box;
+}
+.liyeartable {
+	display: flex;
+	flex-flow: row wrap;
+    margin: 0 auto;
+}
+.limonth {
+	width: 100%;
+	padding: 2rem;
+}
+@media (max-width:600px){.limonth {padding: 1rem 0;}}
+@media (min-width:960px){.limonth {width: 50%;}}
+@media (min-width:1400px){.limonth {width: 33.33%;}}
+@media (min-width:1900px){.limonth {width: 25%;}}
+@media (min-width:2560px){.limonth {width: 20%;}}
+@media (min-width:3840px){.limonth {width: 16.666%;}}
+.limonth table {
+	width: 100%;
+    border-collapse: collapse;
+}
+.limonth td {
+	text-align: center;
+	position: relative;
+	line-height: 1rem;
+    font-size: 1rem;
+	height: 4rem;
+	width: 4rem;
+	min-width: 4rem;
+	min-height: 4rem;
+}
+.lidays td {
+	padding-bottom: 2rem;
+}
+.limonth-info {
+	font-weight: bold;
+	margin-bottom: 1rem;
+}
+
+/* --- Marcar Navidad en el calendario --- */
+[data-liday="25"][data-limonth="12"]::after{
+    border: 1px solid green;
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4rem;
+    height: 4rem;
+}
+/* -- Marcar el primer y ultimo día de cada año -- */
+[data-liday="1"][data-limonth="1"]::after, [data-liday="31"][data-limonth="12"]::after{
+    border: 2px solid #993399;
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4rem;
+    height: 4rem;
+}
+
+/* -- Estilos para días seleccionados --  */
+.limonth td.liday-selected::before{
+    border: 2px dotted red;
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 20%;
+}
+
+/* -- Estilos para días entre la fecha seleccionada --  */
+.liday-between-sel{background-color: #b3f1ff;}
+.liday-selected{background-color: #fff;}
+
+.liday-today::after{
+    border: 1px solid orange;
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4rem;
+    height: 4rem;
+}

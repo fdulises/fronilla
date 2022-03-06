@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar 2</title>
+    <link rel="stylesheet" href="calendar2.css">
+</head>
+<body>
+    <div>
+        <label for="date-input">Date Input Start</label>
+        <input type="text" id="date-input-start">
+    </div>
+    <div>
+        <label for="date-input">Date Input End</label>
+        <input type="text" id="date-input-end">
+    </div>
+    <script type="text/javascript" src="licalendar.js"></script>
+    <script>
+        const mycalendar = new licalendar({
+            totalMonths: 2,
+            // startingMonth: 1,
+            // startingYear: 2023,
+            // startingMonday: true,
+            // showDayNames: false,
+            // showMonthInfo: false,
+            // dayNames: ['s', 'm', 't', 'w', 't', 'f', 's'],
+            // monthNames: [
+            //     'january',
+            //     'february',
+            //     'march',
+            //     'april',
+            //     'may',
+            //     'june',
+            //     'july',
+            //     'august',
+            //     'september',
+            //     'october',
+            //     'november',
+            //     'december'
+            // ],
+        });
+
+        document.querySelector('body').appendChild(mycalendar.mainCalendar);
+
+        const inputStart = document.querySelector('#date-input-start');
+        const inputEnd = document.querySelector('#date-input-end');
+
+        const calendardays = document.querySelectorAll('[data-lidate]');
+        for( let i = 0; i < calendardays.length; i++){
+            calendardays[i].addEventListener("click", function(){
+                
+                this.classList.toggle("liday-selected");
+
+                // Limitar la selección a solo dos elementos
+                let selected = document.querySelectorAll('.liday-selected');
+                if( selected.length > 2 ){
+                    for( let j = 0; j < selected.length; j++) selected[j].classList.remove("liday-selected");
+                    this.classList.add("liday-selected");
+                }
+
+                // Enviar días seleccionados a inputs
+                selected = document.querySelectorAll('.liday-selected');
+                if( 0 == selected.length ){
+                    inputStart.value = "";
+                    inputEnd.value = "";
+                }else if( 1 == selected.length ){
+                    inputStart.value = selected[0].getAttribute('data-lidate');
+                    inputEnd.value = selected[0].getAttribute('data-lidate');
+                } else if ( 2 == selected.length ) {
+                    inputStart.value = selected[0].getAttribute('data-lidate');
+                    inputEnd.value = selected[1].getAttribute('data-lidate');
+                }
+
+                let activeSelection = false;
+                for (let j = 0; j < calendardays.length; j++) {
+                    if (calendardays[j].getAttribute('data-lidate') == inputStart.value) {
+                        activeSelection = true;
+                        //continue;
+                    }
+
+                    if (activeSelection && 2 == selected.length ) calendardays[j].classList.add('liday-between-sel');
+                    else calendardays[j].classList.remove('liday-between-sel');
+
+                    if (calendardays[j].getAttribute('data-lidate') == inputEnd.value) {
+                        activeSelection = false;
+                    }
+                }
+
+            });
+
+        }
+    </script>
+</body>
+</html>
