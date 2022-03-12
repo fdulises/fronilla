@@ -27,25 +27,16 @@
             // showMonthInfo: false,
             // dayNames: ['s', 'm', 't', 'w', 't', 'f', 's'],
             // monthNames: [
-            //     'january',
-            //     'february',
-            //     'march',
-            //     'april',
-            //     'may',
-            //     'june',
-            //     'july',
-            //     'august',
-            //     'september',
-            //     'october',
-            //     'november',
-            //     'december'
+            //     'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'
             // ],
         });
 
         new liDatePicker({
             calendar: mycalendar,
             inputStart: '#date-input-start',
-            inputEnd: '#date-input-end'
+            inputEnd: '#date-input-end',
+            allowPastSelection: false,
+            allowTodaySelection: false
         });
 
         document.querySelector('body').appendChild(mycalendar.mainCalendar);

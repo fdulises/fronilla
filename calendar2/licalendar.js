@@ -138,27 +138,36 @@ class liCalendar{
 }
 
 class liDatePicker{
-    constructor({calendar, inputStart, inputEnd}){
+    constructor({calendar, inputStart, inputEnd, allowPastSelection = true, allowTodaySelection = true}){
 
-        this.calendar = calendar.mainCalendar;
         this.todayInt = new Date(calendar.today).getTime();
+        this.calendar = calendar.mainCalendar;
         this.inputStart = document.querySelector(inputStart);
         this.inputEnd = document.querySelector(inputEnd);
-
-
         this.calendardays = this.calendar.querySelectorAll('[data-lidate]');
+
         for( let i = 0; i < this.calendardays.length; i++){
-            if( new Date(this.calendardays[i].getAttribute('data-lidate')).getTime() > this.todayInt ){
+            let dayTime = new Date(this.calendardays[i].getAttribute('data-lidate')).getTime();
+
+            let isPast = dayTime < this.todayInt;
+            let isToday = dayTime == this.todayInt;
+            let isFuture = dayTime > this.todayInt;
+
+            let shouldSelectToday = allowTodaySelection && isToday;
+            let shouldSelectPast = allowPastSelection && isPast;
+
+            if( isFuture || shouldSelectToday || shouldSelectPast ){
                 this.calendardays[i].addEventListener("click", ()=>{
-                    this.datePicker(this.calendardays[i]);
+                    this.daySelect(this.calendardays[i]);
+                    this.inputSetValues(this.inputStart, this.inputEnd);
+                    this.highlightSelection();
                 });
             }
         }
     }
 
-    datePicker = (item)=>{
-
-        // Resaltar día seleccionado
+    daySelect = (item)=>{
+        // Resaltar día seleccionado al hacer click
         item.classList.toggle("liday-selected");
 
         // Limitar la selección a solo dos elementos
@@ -167,20 +176,25 @@ class liDatePicker{
             for (let j = 0; j < selected.length; j++) selected[j].classList.remove("liday-selected");
             item.classList.add("liday-selected");
         }
-        selected = this.calendar.querySelectorAll('.liday-selected');
+    }
 
+    inputSetValues = (inputStart, inputEnd)=>{
+        const selected = this.calendar.querySelectorAll('.liday-selected');
         // Enviar días seleccionados a inputs
         if (0 == selected.length) {
-            this.inputStart.value = "";
-            this.inputEnd.value = "";
+            inputStart.value = "";
+            inputEnd.value = "";
         } else if (1 == selected.length) {
-            this.inputStart.value = selected[0].getAttribute('data-lidate');
-            this.inputEnd.value = selected[0].getAttribute('data-lidate');
+            inputStart.value = selected[0].getAttribute('data-lidate');
+            inputEnd.value = selected[0].getAttribute('data-lidate');
         } else if (2 == selected.length) {
-            this.inputStart.value = selected[0].getAttribute('data-lidate');
-            this.inputEnd.value = selected[1].getAttribute('data-lidate');
+            inputStart.value = selected[0].getAttribute('data-lidate');
+            inputEnd.value = selected[1].getAttribute('data-lidate');
         }
+    }
 
+    highlightSelection = ()=>{
+        const selected = this.calendar.querySelectorAll('.liday-selected');
         // Resaltar días entre la selección de dos fechas
         let activeSelection = false;
         for (let j = 0; j < this.calendardays.length; j++) {
@@ -195,7 +209,5 @@ class liDatePicker{
                 activeSelection = false;
             }
         }
-
     }
-
 }
