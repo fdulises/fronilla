@@ -1,4 +1,4 @@
-class licalendar{
+class liCalendar{
 
     constructor({ 
         totalMonths = 12, 
@@ -22,7 +22,6 @@ class licalendar{
         this.showMonthInfo = showMonthInfo;
 
         this.mainCalendar = this.yearConstruction(totalMonths);
-
         this.dayNumberInsert();
 
         this.today = `${this.actualDate.getFullYear()}-${this.actualDate.getMonth()+1}-${this.actualDate.getDate()}`;
@@ -136,4 +135,67 @@ class licalendar{
 
         return lidays;
     }
+}
+
+class liDatePicker{
+    constructor({calendar, inputStart, inputEnd}){
+
+        this.calendar = calendar.mainCalendar;
+        this.todayInt = new Date(calendar.today).getTime();
+        this.inputStart = document.querySelector(inputStart);
+        this.inputEnd = document.querySelector(inputEnd);
+
+
+        this.calendardays = this.calendar.querySelectorAll('[data-lidate]');
+        for( let i = 0; i < this.calendardays.length; i++){
+            if( new Date(this.calendardays[i].getAttribute('data-lidate')).getTime() > this.todayInt ){
+                this.calendardays[i].addEventListener("click", ()=>{
+                    this.datePicker(this.calendardays[i]);
+                });
+            }
+        }
+    }
+
+    datePicker = (item)=>{
+
+        // Resaltar día seleccionado
+        item.classList.toggle("liday-selected");
+
+        // Limitar la selección a solo dos elementos
+        let selected = this.calendar.querySelectorAll('.liday-selected');
+        if (selected.length > 2) {
+            for (let j = 0; j < selected.length; j++) selected[j].classList.remove("liday-selected");
+            item.classList.add("liday-selected");
+        }
+        selected = this.calendar.querySelectorAll('.liday-selected');
+
+        // Enviar días seleccionados a inputs
+        if (0 == selected.length) {
+            this.inputStart.value = "";
+            this.inputEnd.value = "";
+        } else if (1 == selected.length) {
+            this.inputStart.value = selected[0].getAttribute('data-lidate');
+            this.inputEnd.value = selected[0].getAttribute('data-lidate');
+        } else if (2 == selected.length) {
+            this.inputStart.value = selected[0].getAttribute('data-lidate');
+            this.inputEnd.value = selected[1].getAttribute('data-lidate');
+        }
+
+        // Resaltar días entre la selección de dos fechas
+        let activeSelection = false;
+        for (let j = 0; j < this.calendardays.length; j++) {
+            if (this.calendardays[j].getAttribute('data-lidate') == this.inputStart.value) {
+                activeSelection = true;
+            }
+
+            if (activeSelection && 2 == selected.length) this.calendardays[j].classList.add('liday-between-sel');
+            else this.calendardays[j].classList.remove('liday-between-sel');
+
+            if (this.calendardays[j].getAttribute('data-lidate') == this.inputEnd.value) {
+                activeSelection = false;
+            }
+        }
+
+    }
+
 }

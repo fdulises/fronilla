@@ -18,11 +18,11 @@
     </div>
     <script type="text/javascript" src="licalendar.js"></script>
     <script>
-        const mycalendar = new licalendar({
+        const mycalendar = new liCalendar({
             totalMonths: 2,
             // startingMonth: 1,
             // startingYear: 2023,
-            // startingMonday: true,
+            startingMonday: true,
             // showDayNames: false,
             // showMonthInfo: false,
             // dayNames: ['s', 'm', 't', 'w', 't', 'f', 's'],
@@ -42,55 +42,13 @@
             // ],
         });
 
+        new liDatePicker({
+            calendar: mycalendar,
+            inputStart: '#date-input-start',
+            inputEnd: '#date-input-end'
+        });
+
         document.querySelector('body').appendChild(mycalendar.mainCalendar);
-
-        const inputStart = document.querySelector('#date-input-start');
-        const inputEnd = document.querySelector('#date-input-end');
-
-        const calendardays = document.querySelectorAll('[data-lidate]');
-        for( let i = 0; i < calendardays.length; i++){
-            calendardays[i].addEventListener("click", function(){
-                
-                this.classList.toggle("liday-selected");
-
-                // Limitar la selección a solo dos elementos
-                let selected = document.querySelectorAll('.liday-selected');
-                if( selected.length > 2 ){
-                    for( let j = 0; j < selected.length; j++) selected[j].classList.remove("liday-selected");
-                    this.classList.add("liday-selected");
-                }
-
-                // Enviar días seleccionados a inputs
-                selected = document.querySelectorAll('.liday-selected');
-                if( 0 == selected.length ){
-                    inputStart.value = "";
-                    inputEnd.value = "";
-                }else if( 1 == selected.length ){
-                    inputStart.value = selected[0].getAttribute('data-lidate');
-                    inputEnd.value = selected[0].getAttribute('data-lidate');
-                } else if ( 2 == selected.length ) {
-                    inputStart.value = selected[0].getAttribute('data-lidate');
-                    inputEnd.value = selected[1].getAttribute('data-lidate');
-                }
-
-                let activeSelection = false;
-                for (let j = 0; j < calendardays.length; j++) {
-                    if (calendardays[j].getAttribute('data-lidate') == inputStart.value) {
-                        activeSelection = true;
-                        //continue;
-                    }
-
-                    if (activeSelection && 2 == selected.length ) calendardays[j].classList.add('liday-between-sel');
-                    else calendardays[j].classList.remove('liday-between-sel');
-
-                    if (calendardays[j].getAttribute('data-lidate') == inputEnd.value) {
-                        activeSelection = false;
-                    }
-                }
-
-            });
-
-        }
     </script>
 </body>
 </html>
