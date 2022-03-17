@@ -140,14 +140,14 @@ class liCalendar{
 class liDatePicker{
     constructor({calendar, inputStart, inputEnd, allowPastSelection = true, allowTodaySelection = true}){
 
-        this.todayInt = new Date(calendar.today).getTime();
+        this.todayInt = new Date(calendar.today.replace(/-/g, "/")).getTime();
         this.calendar = calendar.mainCalendar;
         this.inputStart = document.querySelector(inputStart);
         this.inputEnd = document.querySelector(inputEnd);
         this.calendardays = this.calendar.querySelectorAll('[data-lidate]');
 
         for( let i = 0; i < this.calendardays.length; i++){
-            let dayTime = new Date(this.calendardays[i].getAttribute('data-lidate')).getTime();
+            let dayTime = new Date(this.calendardays[i].getAttribute('data-lidate').replace(/-/g, "/")).getTime();
 
             let isPast = dayTime < this.todayInt;
             let isToday = dayTime == this.todayInt;
