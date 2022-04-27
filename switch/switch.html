@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pure CSS Switch</title>
+    <style>
+    body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background-color: #ecf0f3;
+    }
+
+    .litoggle-state {display: none;}
+
+    .litoogle-label {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .litoogle-text {margin-left: 1rem;}
+
+    .litoggle{
+        display: flex;
+        position: relative;
+    }
+
+    .litoggle-body{
+        height: 32px;
+        width: 60px;
+        border-radius: 20px;
+        background-color: #ccc;
+        display: block;
+        transition: 0.5s all;
+    }
+    .litoggle-state:checked ~ .litoggle-body {background-color: #45B9DD;}
+
+    .litoggle-indicator {
+        display: block;
+        height: 24px;
+        width: 24px;
+        background: #fff;
+        border-radius: 50%;
+        transition: left 0.4s cubic-bezier(0.85, 0.05, 0.18, 1.35);
+        position: absolute;
+        top: 4px;
+        left: 4px;
+    }
+    .litoggle-state:checked ~ .litoggle-indicator {left: 55%}
+    </style>
+</head>
+<body>
+    <label class="litoogle-label">
+        <div class="litoggle" tabindex="0" role="checkbox">
+            <input class="litoggle-state" type="checkbox" name="check" value="check" />
+            <div class="litoggle-body"></div>
+            <div class="litoggle-indicator"></div>
+        </div>
+        <div class="litoogle-text"> He leído los términos y condiciones</div>
+    </label>
+</body>
+</html>
