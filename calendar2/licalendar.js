@@ -123,7 +123,7 @@ class liCalendar{
         const lidays = document.createElement('tr');
         lidays.classList.add('lidays');
 
-        const liDaysList = this.dayNames;
+        let liDaysList = this.dayNames.slice();
 
         if( this.startingMonday ) liDaysList.push(liDaysList.splice(0, 1)[0]);
 
