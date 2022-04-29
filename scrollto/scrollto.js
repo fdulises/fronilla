@@ -32,7 +32,6 @@ window.addEventListener('load', function(){
     }
 
     let horcont = document.querySelector('.scy');
-    
     horcont.addEventListener('wheel', transformScroll);
 
     let verticalitems = horcont.querySelectorAll('li');
