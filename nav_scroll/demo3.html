@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/linavscroll.css">
+</head>
+<body>
+    
+    <div class="linavscroll_root">
+        <h1>Navegación Scroll Automática con marcadores</h1>
+        
+        <div id="linavscroll_container" class="listickybar"></div>
+        
+        <div id="seccion1" data-navsection-title="Parte #1" class="linavscroll_section">
+            <h2>Seccion #1</h2>
+            
+            <p>En este ejemplo solo se creara la navegación si hay suficiente area para el scroll.</p>
+            
+        </div>
+        
+        <div id="seccion2" data-navsection-title="Parte #2" class="linavscroll_section">
+            <h2>Sección #2</h2>
+            
+            <p>Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.
+            </p>
+        </div>
+        
+        <div id="seccion3" data-navsection-title="Parte #3" class="linavscroll_section">
+            <h2>Seccion #3</h2>
+            
+            <p>Cras ultricies mi eu turpis hendrerit fringilla.</p>
+        </div>
+        
+        <div id="seccion4" data-navsection-title="Parte #4" class="linavscroll_section">
+            <h2>Seccion #4</h2>
+            
+            <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis
+                porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci.</p>
+            
+        </div>
+
+        <div id="seccion5" data-navsection-title="Parte #5" class="linavscroll_section">
+        
+            <h2>Seccion #5</h2>
+            
+            <p>Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est.
+                Quisque id mi. Ut tincidunt tincidunt erat. Etiam feugiat lorem non metus.</p>
+            <p>Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est.
+                Quisque id mi. Ut tincidunt tincidunt erat. Etiam feugiat lorem non metus.</p>
+            <p>Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est.
+                Quisque id mi. Ut tincidunt tincidunt erat. Etiam feugiat lorem non metus.</p>
+            
+        </div>
+    </div>
+
+    <script src="js/linavscroll.js"></script>
+    <script type="text/javascript">
+        new liNavScroll({
+            nav_container: "#linavscroll_container",
+            section_selector: ".linavscroll_section",
+            root_container: ".linavscroll_root",
+            active_class: "linavscroll_active",
+            only_when_hasscroll: true,
+            offset: -50
+        });
+        const navscroollroot = document.querySelector(".linavscroll_root");
+        // console.log(scrollHeight);
+        // console.log(clientHeight);
+    </script>
+</body>
+</html>

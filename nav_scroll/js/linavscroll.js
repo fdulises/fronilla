@@ -9,7 +9,7 @@ new liNavScroll({
 */
 class liNavScroll {
 
-    constructor({ nav_container, section_selector, active_class, root_container, threshold = 0.25, offset = 0, rootMargin = '0px 0px' }) {
+    constructor({ nav_container, section_selector, active_class, root_container, threshold = 0.25, offset = 0, rootMargin = '0px 0px', only_when_hasscroll = false }) {
         this.nav_container = document.querySelector(nav_container);
         this.section_selector = document.querySelectorAll(section_selector);
         this.active_class = active_class;
@@ -17,21 +17,26 @@ class liNavScroll {
         this.root_container = document.querySelector(root_container);
         this.offset = offset;
 
-        this.generateNav();
+        const has_scroll = this.root_container.clientHeight < (this.root_container.scrollHeight+this.offset);
+        const should_show = !only_when_hasscroll || (only_when_hasscroll && has_scroll);
 
-        new liScrollObserver({
-            root_container: root_container,
-            section_selector: section_selector,
-            threshold: threshold,
-            rootMargin: rootMargin,
-            callback: (target) => {
-                this.updateMarker({
-                    target: "#" + target.id,
-                    nav_container: this.nav_container,
-                    active_class: this.active_class
-                });
-            }
-        });
+        if( should_show ){
+            this.generateNav();
+
+            new liScrollObserver({
+                root_container: root_container,
+                section_selector: section_selector,
+                threshold: threshold,
+                rootMargin: rootMargin,
+                callback: (target) => {
+                    this.updateMarker({
+                        target: "#" + target.id,
+                        nav_container: this.nav_container,
+                        active_class: this.active_class
+                    });
+                }
+            });
+        }
     }
 
     generateLink(section) {
@@ -47,8 +52,6 @@ class liNavScroll {
             e.preventDefault();
 
             const destino = liOffset(section, this.root_container);
-
-            console.log(destino.top + this.offset )
 
             liScrollTo({
                 to: destino.top + this.offset,
