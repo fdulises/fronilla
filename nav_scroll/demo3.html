@@ -54,11 +54,15 @@
                 Quisque id mi. Ut tincidunt tincidunt erat. Etiam feugiat lorem non metus.</p>
             
         </div>
+
+        <div>
+            <button type="button" id="updateLiNavStatus">Test</button>
+        </div>
     </div>
 
     <script src="js/linavscroll.js"></script>
     <script type="text/javascript">
-        new liNavScroll({
+        const mynavscroll = new liNavScroll({
             nav_container: "#linavscroll_container",
             section_selector: ".linavscroll_section",
             root_container: ".linavscroll_root",
@@ -66,9 +70,7 @@
             only_when_hasscroll: true,
             offset: -50
         });
-        const navscroollroot = document.querySelector(".linavscroll_root");
-        // console.log(scrollHeight);
-        // console.log(clientHeight);
+        document.querySelector("#updateLiNavStatus").addEventListener("click", mynavscroll.shouldShow);
     </script>
 </body>
 </html>

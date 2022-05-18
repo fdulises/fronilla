@@ -16,27 +16,24 @@ class liNavScroll {
         this.root_container = root_container || 'body';
         this.root_container = document.querySelector(root_container);
         this.offset = offset;
+        this.only_when_hasscroll = only_when_hasscroll;
 
-        const has_scroll = this.root_container.clientHeight < (this.root_container.scrollHeight+this.offset);
-        const should_show = !only_when_hasscroll || (only_when_hasscroll && has_scroll);
+        this.generateNav();
 
-        if( should_show ){
-            this.generateNav();
+        new liScrollObserver({
+            root_container: root_container,
+            section_selector: section_selector,
+            threshold: threshold,
+            rootMargin: rootMargin,
+            callback: (target) => {
+                this.updateMarker({
+                    target: "#" + target.id,
+                    nav_container: this.nav_container,
+                    active_class: this.active_class
+                });
+            }
+        });
 
-            new liScrollObserver({
-                root_container: root_container,
-                section_selector: section_selector,
-                threshold: threshold,
-                rootMargin: rootMargin,
-                callback: (target) => {
-                    this.updateMarker({
-                        target: "#" + target.id,
-                        nav_container: this.nav_container,
-                        active_class: this.active_class
-                    });
-                }
-            });
-        }
     }
 
     generateLink(section) {
@@ -86,6 +83,13 @@ class liNavScroll {
 
         active = nav_container.querySelector('a[href="' + target + '"]');
         active.classList.add(active_class);
+    }
+
+    shouldShow = ()=>{
+        const has_scroll = this.root_container.clientHeight < (this.root_container.scrollHeight+this.offset);
+        const should_show = !this.only_when_hasscroll || (this.only_when_hasscroll && has_scroll);
+        if( should_show ) this.nav_container.style.display = "block";
+        else this.nav_container.style.display = "none";
     }
 }
 
