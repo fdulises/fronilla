@@ -67,10 +67,10 @@
             section_selector: ".linavscroll_section",
             root_container: ".linavscroll_root",
             active_class: "linavscroll_active",
-            only_when_hasscroll: true,
             offset: -50
         });
-        document.querySelector("#updateLiNavStatus").addEventListener("click", mynavscroll.shouldShow);
+        mynavscroll.checkScrollHeight();
+        document.querySelector("#updateLiNavStatus").addEventListener("click", mynavscroll.checkScrollHeight);
     </script>
 </body>
 </html>

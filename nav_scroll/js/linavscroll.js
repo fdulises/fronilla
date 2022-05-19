@@ -9,14 +9,21 @@ new liNavScroll({
 */
 class liNavScroll {
 
-    constructor({ nav_container, section_selector, active_class, root_container, threshold = 0.25, offset = 0, rootMargin = '0px 0px', only_when_hasscroll = false }) {
+    constructor({ 
+        active_class, 
+        nav_container, 
+        offset = 0, 
+        root_container, 
+        rootMargin = '0px 0px',
+        section_selector, 
+        threshold = 0.25
+    }) {
         this.nav_container = document.querySelector(nav_container);
         this.section_selector = document.querySelectorAll(section_selector);
         this.active_class = active_class;
         this.root_container = root_container || 'body';
         this.root_container = document.querySelector(root_container);
         this.offset = offset;
-        this.only_when_hasscroll = only_when_hasscroll;
 
         this.generateNav();
 
@@ -85,10 +92,9 @@ class liNavScroll {
         active.classList.add(active_class);
     }
 
-    shouldShow = ()=>{
+    checkScrollHeight = ()=>{
         const has_scroll = this.root_container.clientHeight < (this.root_container.scrollHeight+this.offset);
-        const should_show = !this.only_when_hasscroll || (this.only_when_hasscroll && has_scroll);
-        if( should_show ) this.nav_container.style.display = "block";
+        if( has_scroll ) this.nav_container.style.display = "block";
         else this.nav_container.style.display = "none";
     }
 }
