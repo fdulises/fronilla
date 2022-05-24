@@ -4,33 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animated ScrollTo Vanilla JS</title>
+    <title>Carousel ScrollTo Vanilla JS</title>
     <style>
         *{
             box-sizing: border-box;
         }
         body{margin:0}
-        .scy{
+        .licarousel{
+            margin: 0;
+            padding: 0;
             overflow: auto;
             white-space: nowrap;
             max-width: 100%;
-            position: -webkit-sticky;
-            position: sticky;
-            top: -1px;
-            background-color: white;
         }
-        .scy ul{
-            margin: 0;
-            padding: 0;
-        }
-        .scy li{
+        .licarousel li{
             display: inline-block;
             outline: 3px dashed green;
             margin: 10px 10px;
-        }
-        .scy li a{
-            display: block;
-            padding: 10px 10px;
         }
         .licarousel_active{
             outline: 3px dotted red !important;
@@ -38,33 +28,31 @@
     </style>
 </head>
 <body>
-    <h1>Animated ScrollTo Vanilla JS</h1>
+    <h1>Carousel ScrollTo Vanilla JS</h1>
 
-    <div>
-        <div class="scy">
-            <ul id="containerx">
-                <li>
-                    <h4>#1 Lorem ipsum dolor</h4>
-                    <p>Lorem ipsum dolor sit amet</p>
-                </li>
-                <li>
-                    <h4>#2 Lorem ipsum dolor</h4>
-                    <p>Lorem ipsum dolor sit amet</p>
-                </li>
-                <li>
-                    <h4>#3 Lorem ipsum dolor</h4>
-                    <p>Lorem ipsum dolor sit amet</p>
-                </li>
-                <li>
-                    <h4>#4 Lorem ipsum dolor</h4>
-                    <p>Lorem ipsum dolor sit amet</p>
-                </li>
-                <li>
-                    <h4>#5 Lorem ipsum dolor</h4>
-                    <p>Lorem ipsum dolor sit amet</p>
-                </li>
-            </ul>
-        </div>
+    <div class="licarousel_container">
+        <ul class="licarousel">
+            <li>
+                <h4>#1 Lorem ipsum dolor</h4>
+                <p>Lorem ipsum dolor sit amet</p>
+            </li>
+            <li>
+                <h4>#2 Lorem ipsum dolor</h4>
+                <p>Lorem ipsum dolor sit amet</p>
+            </li>
+            <li>
+                <h4>#3 Lorem ipsum dolor</h4>
+                <p>Lorem ipsum dolor sit amet</p>
+            </li>
+            <li>
+                <h4>#4 Lorem ipsum dolor</h4>
+                <p>Lorem ipsum dolor sit amet</p>
+            </li>
+            <li>
+                <h4>#5 Lorem ipsum dolor</h4>
+                <p>Lorem ipsum dolor sit amet</p>
+            </li>
+        </ul>
         <div>
             <button type="button" class="licarousel_direction licarousel_prev">Prev</button>
             <button type="button" class="licarousel_direction licarousel_next">Next</button>

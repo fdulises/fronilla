@@ -1,53 +1,76 @@
-//Implementar ejemplos con el efecto scrollto
-window.addEventListener('load', function(){
+class licarousel{
 
-    let horcont = document.querySelector('.scy');
-    // horcont.addEventListener('wheel', transformScroll);
+    constructor({container, selector, items, controls = false}){
 
-    let verticalitems = horcont.querySelectorAll('li');
+        this.container = ( (typeof container) == 'string' ) ? document.querySelector(container) : container;
+        this.selector = this.container.querySelector(selector);
+        this.items = this.selector.querySelectorAll(items);
+        this.controls = controls;
 
-    const controls_container = document.createElement('div');
-    controls_container.classList.add("licarousel_controls");
-    horcont.parentNode.appendChild(controls_container);
-
-    for( let i = 0; i < verticalitems.length; i++){
-
-        if( i == 0 ) verticalitems[0].classList.add('licarousel_active');
-
-        let ccontrol_btn = document.createElement('button');
-        ccontrol_btn.addEventListener('click', ()=>verticalitems[i].click());
-        controls_container.appendChild(ccontrol_btn);
-
-        verticalitems[i].addEventListener('click', function (){
-            this.parentNode.querySelector('.licarousel_active').classList.remove('licarousel_active');
-            this.classList.add('licarousel_active');
-
-            let posicionx = this.getBoundingClientRect().x;
-            let ancho = this.offsetWidth;
-            let ancho_cont = horcont.offsetWidth;
-            let espacio = (ancho_cont - ancho)/2;
-
-            let distancia = (horcont.scrollLeft + posicionx)-espacio;
-            horcont.scroll({
-                left: distancia,
-                behavior: 'smooth'
-            });
-
-        }, true);
+        if(controls) this.addControlsContainer();
+        this.main();
     }
 
-    document.querySelector('.licarousel_prev').addEventListener('click', function(){
-        let actual_element = document.querySelector('.licarousel_active');
-        let element = actual_element.previousElementSibling;
-        if( element ) element.click();
-        else verticalitems[verticalitems.length-1].click();
-    });
-    document.querySelector('.licarousel_next').addEventListener('click', function(){
+    addControlsContainer(){
+        this.controls_container = document.createElement('div');
+        this.controls_container.classList.add("licarousel_controls");
+        this.container.appendChild(this.controls_container);
+    }
 
-        let actual_element = document.querySelector('.licarousel_active');
-        let element = actual_element.nextElementSibling;
-        if( element ) element.click();
-        else verticalitems[0].click();
+    main(){
+        for( let i = 0; i < this.items.length; i++){
 
+            if( i == 0 ) this.items[0].classList.add('licarousel_active');
+
+            if( this.controls ){
+                let ccontrol_btn = document.createElement('button');
+                ccontrol_btn.addEventListener('click', ()=>this.items[i].click());
+                this.controls_container.appendChild(ccontrol_btn);
+            }
+
+            this.items[i].addEventListener('click', ()=>{
+                this.items[i].parentNode.querySelector('.licarousel_active').classList.remove('licarousel_active');
+                this.items[i].classList.add('licarousel_active');
+
+                let posicionx = this.items[i].getBoundingClientRect().x;
+                let ancho = this.items[i].offsetWidth;
+                let ancho_cont = this.selector.offsetWidth;
+                let espacio = (ancho_cont - ancho)/2;
+
+                let distancia = (this.selector.scrollLeft + posicionx)-espacio;
+                this.selector.scroll({
+                    left: distancia,
+                    behavior: 'smooth'
+                });
+
+            }, true);
+        }
+    }
+
+    prev = ()=>{
+        let actual = this.selector.querySelector('.licarousel_active');
+        let element = actual.previousElementSibling;
+        if( element ) element.click();
+        else this.items[this.items.length-1].click();
+    }
+
+    next = ()=>{
+        let actual = this.selector.querySelector('.licarousel_active');
+        let element = actual.nextElementSibling;
+        if( element ) element.click();
+        else this.items[0].click();
+    }
+
+}
+
+//Implementar ejemplos con el efecto scrollto
+window.addEventListener('load', function(){
+    const mycarousel = new licarousel({
+        container: '.licarousel_container', 
+        selector: '.licarousel',  
+        items: 'li',
+        controls: true
     });
+    document.querySelector('.licarousel_prev').addEventListener('click', mycarousel.prev);
+    document.querySelector('.licarousel_next').addEventListener('click', mycarousel.next);
 });
