@@ -1,3 +1,6 @@
+/*
+* https://codepen.io/fdulises/pen/QWQOqmb
+*/
 class licarousel{
 
     constructor({container, selector, items, controls = false, textprev = 'Prev', textnext = 'Next'}){
@@ -26,6 +29,7 @@ class licarousel{
 
             if( this.controls ){
                 let ccontrol_btn = document.createElement('button');
+                ccontrol_btn.setAttribute("type", "button");
                 ccontrol_btn.setAttribute("data-item", i);
                 ccontrol_btn.classList.add("licarousel_button");
                 if( i == 0 ) ccontrol_btn.classList.add('licarousel_bntactive');
