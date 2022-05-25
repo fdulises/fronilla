@@ -10,6 +10,7 @@
             box-sizing: border-box;
         }
         body{margin:0}
+        img{max-width: 100%;}
         .licarousel{
             margin: 0;
             padding: 0;
@@ -18,12 +19,38 @@
             max-width: 100%;
         }
         .licarousel li{
+            white-space: initial;
             display: inline-block;
             outline: 3px dashed green;
             margin: 10px 10px;
         }
         .licarousel_active{
-            outline: 3px dotted red !important;
+            outline: 3px dashed red !important;
+        }
+        .licarousel_controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .licarousel_button {
+            border: none;
+            background-color: #C3C9D6;
+            margin: 0 2px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+        .licarousel_button.licarousel_bntactive {
+            background-color: #999;
+            box-shadow: 0px 0px 5px 0px #333;
+        }
+        .licarousel_direction {
+            margin: 0 2px;
+            border: none;
+            background-color: #C3C9D6;
+            color: #333;
+            font-size: 18px;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -34,31 +61,59 @@
         <ul class="licarousel">
             <li>
                 <h4>#1 Lorem ipsum dolor</h4>
-                <p>Lorem ipsum dolor sit amet</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor</p>
             </li>
             <li>
                 <h4>#2 Lorem ipsum dolor</h4>
-                <p>Lorem ipsum dolor sit amet</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor</p>
             </li>
             <li>
                 <h4>#3 Lorem ipsum dolor</h4>
-                <p>Lorem ipsum dolor sit amet</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor</p>
             </li>
             <li>
                 <h4>#4 Lorem ipsum dolor</h4>
-                <p>Lorem ipsum dolor sit amet</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor</p>
             </li>
             <li>
                 <h4>#5 Lorem ipsum dolor</h4>
-                <p>Lorem ipsum dolor sit amet</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor</p>
             </li>
         </ul>
-        <div>
-            <button type="button" class="licarousel_direction licarousel_prev">Prev</button>
-            <button type="button" class="licarousel_direction licarousel_next">Next</button>
-        </div>
+    </div>
+
+    <div class="licarousel_container">
+        <ul class="licarousel">
+            <li>
+                <img src="https://picsum.photos/900/300?r=1">
+            </li>
+            <li>
+                <img src="https://picsum.photos/900/300?r=2">
+            </li>
+            <li>
+                <img src="https://picsum.photos/900/300?r=3">
+            </li>
+            <li>
+                <img src="https://picsum.photos/900/300?r=4">
+            </li>
+        </ul>
     </div>
 
     <script src="scrollto.js"></script>
+    <script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', function () {
+        const carousel_list = document.querySelectorAll('.licarousel_container');
+        for (i = 0; i < carousel_list.length; i++) {
+            let mycarousel = new licarousel({
+                container: carousel_list[i],
+                selector: '.licarousel',
+                items: 'li',
+                controls: true,
+                textprev: '&laquo;',
+                textnext: '&raquo;'
+            });
+        }
+    });
+    </script>
 </body>
 </html>
